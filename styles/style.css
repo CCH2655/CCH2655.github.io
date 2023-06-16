@@ -1,34 +1,27 @@
-.circle {
-    font-size: 30px;
-    width: 100px;
-    height: 100px;
+.container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
     background-color: wheat;
-    border-radius: 50%;
-    
-    color: white;
-    font-weight: 900;
-
+}
+.centered {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
-.c1 {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-}
-.c2 {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-}
-.c3 {
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-}
-.c4 {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-}
+
+.an{
+    animation-name: flo;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    position: relative;
+    bottom: 80px;
+    left:20px;
+  
+  }
+  @keyframes flo{
+    50%{
+      transform: translateY(30px);
+    }
+  }
