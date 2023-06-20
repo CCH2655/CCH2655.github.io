@@ -217,10 +217,3 @@ function enforceMinMax(el) {
     }
   }
 }
-
-$(document).ready(function () {
-  $("#datepicker").datepicker({
-    format: "yyyy-mm-dd", // 日期格式
-    autoclose: true, // 選擇日期後自動關閉
-  });
-});
