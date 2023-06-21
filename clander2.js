@@ -112,7 +112,7 @@ function handleDayClick(event) {
   const date = dayCell.dataset.date;
 
   // 彈出對話框輸入備註
-  const note = prompt(`${date} 請輸入備註:`);
+  const note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
   if (note) {
     addNoteToCalendar(date, note);
   }
@@ -149,6 +149,9 @@ function saveNotesToLocalStorage() {
 // 從 Local Storage 中恢復備註
 function restoreNotes() {
   const savedNotes = localStorage.getItem("calendarNotes");
+
+  // console.log(savedNotes);
+
   if (savedNotes) {
     calendar.notes = JSON.parse(savedNotes);
     // 更新行事曆顯示
@@ -181,6 +184,9 @@ function changeMonth(monthOffset) {
   }
 
   renderCalendar(document.getElementById("calendar"));
+
+  // 切換候補上note
+  restoreNotes();
 }
 
 // 獲取指定月份的天數

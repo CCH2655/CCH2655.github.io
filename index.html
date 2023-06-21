@@ -17,16 +17,16 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <div class="container">
-        <div class="centered">
-          <img  class="an" src="./img/Rascal01.png" alt="Rascal01">
-          
+    <div class="container displayFCC_col">
+          <img  class="an imgObj" src="./img/Rascal01.png" alt="Rascal01">
           
           <div class="listBlock">
-            <h1>每日挑戰紀錄</h1>
+            <h1 class="textCenter">每日挑戰紀錄</h1>
+
             <span id="prev-month"> <上個月 </span>
             <span id="next-month"> 下個月> </span>
-            <div class="calendar" id="calendar"></div>
+            <span class="calendar textCenter" id="calendar"></span>
+            
 
             <!-- <form style="width: 100%;">
               <input type="text" />
@@ -53,15 +53,9 @@
 
           </div>
 
-
-        </div>
-        
-        
-        
     </div>
   </body>
-  <!-- <script src="./app.js"></script> -->
-  <!-- <script src="./clander.js"></script> -->
+
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="./clander2.js"></script>
   

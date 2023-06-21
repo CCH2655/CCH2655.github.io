@@ -1,9 +1,19 @@
+.displayFCC_col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .displayFCC {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.textCenter {
+  text-align: center;
+}
 .container {
+    overflow: hidden;
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -37,17 +47,21 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.imgObj{
+  /* position: relative; */
+  margin: 0px 0px 20px;
+  width: 100%;
+  max-width: 200px;
+}
 .an{
-    animation-name: flo;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    position: relative;
-    margin: 50px 0px;
-  
+    animation: flo ease-in-out 0.75s infinite alternate;
   }
   @keyframes flo{
-    50%{
-      transform: translateY(30px);
+    0%{
+      transform: translateY(5px);
+    }
+    100%{
+      transform: translateY(-5px);
     }
   }
 
