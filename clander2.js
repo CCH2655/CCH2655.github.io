@@ -41,7 +41,7 @@ function renderCalendar(container) {
 
   // 渲染星期標題
   const weekDays = ["日", "一", "二", "三", "四", "五", "六"];
-  const weekRow = document.createElement("div");
+  var weekRow = document.createElement("div");
   weekRow.classList.add("week-row");
   for (const day of weekDays) {
     const dayCell = document.createElement("div");
@@ -54,36 +54,55 @@ function renderCalendar(container) {
   // 渲染日期格子
   const firstDay = new Date(calendar.year, calendar.month, 1).getDay();
   const daysInMonth = getDaysInMonth(calendar.year, calendar.month);
+  const lastDay = new Date(calendar.year, calendar.month, daysInMonth).getDay();
   //   const startDay = firstDay === 0 ? 6 : firstDay - 1; // 將星期日從索引 0 轉為索引 6
-  const startDay = firstDay;
 
+  // console.log("firstDay:" + firstDay);
+  // console.log("lastDay:" + lastDay);
+
+  const startDay = firstDay;
+  // 先建立含有padding的陣列
+  let new_month = [];
   let daycounter = 1;
-  const weekRow01 = document.createElement("div");
-  weekRow01.classList.add("week-row");
   while (daycounter <= daysInMonth) {
     if (daycounter == 1) {
-      if (startDay !== 0) {
-        for (let i = 0; i < startDay; i++) {
-          const emptyCell = document.createElement("div");
-          emptyCell.classList.add("day-cell", "empty-cell");
-          weekRow01.appendChild(emptyCell);
-        }
+      for (let i = 0; i < startDay; i++) {
+        console.log(i);
+        new_month.push(0);
       }
     }
-    console.log(new Date(calendar.year, calendar.month, daycounter).getDay());
+    new_month.push(daycounter);
+    if (daycounter == daysInMonth) {
+      for (let i = 0; i < 6 - lastDay; i++) {
+        new_month.push(0);
+      }
+    }
     daycounter++;
   }
-  container.appendChild(weekRow01);
 
-  for (let i = 1; i <= daysInMonth; i++) {
-    const dayCell = document.createElement("div");
-    dayCell.classList.add("day-cell");
-    dayCell.textContent = i;
-    dayCell.dataset.date = i;
-    dayCell.addEventListener("click", handleDayClick);
-    calendarContent.appendChild(dayCell);
+  // console.log(parseInt(new_month.length / 7));
+  // 迴圈建立appendChild
+  const weeks = parseInt(new_month.length / 7);
+  for (let i = 0; i < weeks; i++) {
+    let weekRow = document.createElement("div");
+    weekRow.classList.add("week-row");
+    for (var j = 0; j < 7; j++) {
+      // 建立 span 元素
+      if (new_month[i * 7 + j] == 0) {
+        var emptyCell = document.createElement("div");
+        emptyCell.classList.add("day-cell", "empty-cell");
+        weekRow.appendChild(emptyCell);
+      } else {
+        var dayCell = document.createElement("div");
+        dayCell.classList.add("day-cell");
+        dayCell.textContent = new_month[i * 7 + j];
+        dayCell.dataset.date = new_month[i * 7 + j];
+        dayCell.addEventListener("click", handleDayClick);
+        weekRow.appendChild(dayCell);
+      }
+    }
+    calendarContent.appendChild(weekRow);
   }
-
   container.appendChild(calendarContent);
 }
 
@@ -118,7 +137,7 @@ function addNoteToCalendar(date, note) {
     console.log(dayCell.childNodes[1]);
     dayCell.lastChild.remove();
   }
-  noteText.classList.add("click-disabled");
+  noteText.classList.add("click-disabled", "note");
   dayCell.appendChild(noteText);
 }
 
@@ -140,7 +159,7 @@ function restoreNotes() {
       if (calendar.notes[dateKey]) {
         const noteContent = calendar.notes[dateKey];
         const noteText = document.createElement("div");
-        noteText.classList.add("click-disabled");
+        noteText.classList.add("click-disabled", "note");
         // Note
         noteText.textContent = `${noteContent}`;
         dayCell.appendChild(noteText);

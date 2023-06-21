@@ -65,164 +65,6 @@
     pointer-events: none;
   }
   
-  body {
-    background: -webkit-gradient(linear, left top, right top, from(#5482ff), to(#c054ff));
-    background: linear-gradient(90deg, #5482ff, #c054ff);
-  }
-  
-  header {
-    height: 20vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  
-  header h1 {
-    color: white;
-    font-size: 3rem;
-  }
-  
-  form {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    /* Chrome, Safari, Edge, Opera */
-    /* Firefox */
-  }
-  
-  form input, form button {
-    border: none;
-    padding: 0.25rem 0.5rem;
-    font-size: 1.75rem;
-    margin: 0.1rem;
-  }
-  
-  form input[type="text"] {
-    width: 150px;
-    text-align: center;
-  }
-
-  form input[type="number"] {
-    width: 50px;
-    text-align: center;
-  }
-  
-  form input::-webkit-outer-spin-button,
-  form input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  form input[type="number"] {
-    -moz-appearance: textfield;
-  }
-  
-  form button {
-    cursor: pointer;
-    /* background-color: #355fd3; */
-    background-image: linear-gradient(45deg, #fd7e14 0%, #fa5252 100%);
-    color: white;
-    padding: 0.25rem 1rem;
-    border-radius: 8px;
-  }
-  
-  section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  
-  section div.todo {
-    /* width: 30vw; */
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    margin: 0.2rem 0rem;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-  }
-  
-  section div.todo p {
-    background-color: white;
-    color: black;
-    padding: 0.25rem 0.5rem;
-    font-size: 1.5rem;
-  }
-  
-  section div.todo p.todo-text {
-    width: 50%;
-  }
-  
-  section div.todo p.todo-time {
-    width: 20%;
-    text-align: center;
-  }
-  
-  section div.todo button {
-    
-    padding: 0.25rem 0.5rem;
-    font-size: 1.5rem;
-    border: none;
-    cursor: pointer;
-    color: white;
-  }
-  
-  section div.todo button.complete {
-    background-color: #16e616;
-  }
-  
-  section div.todo button.trash {
-    background-color: red;
-  }
-  
-  div.sort {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    margin: 1rem 0rem;
-  }
-  
-  div.sort button {
-    cursor: pointer;
-    /* background-color: #355fd3; */
-    background-image: linear-gradient(45deg, #fd7e14 0%, #fa5252 100%);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1.75rem;
-    border-radius: 8px;
-  }
   
   .done {
     opacity: 0.5;
@@ -265,23 +107,6 @@
               transform: scale(0);
     }
   }
-  /*# sourceMappingURL=style.css.map */
-
-
-
-
-
-  /* .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    width: 300px;
-  } */
-  /* .day {
-    padding: 5px;
-    border: 1px solid #ccc;
-    text-align: center;
-  } */
 
   .week-row {
     display: flex;
@@ -291,15 +116,26 @@
     flex: 1;
     text-align: center;
     padding: 10px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    border-top:    0px solid  #fff;
+    border-right:  0px dashed #fff;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.415);
+    border-left:   0px solid  #fff;
   }
   
   .empty-cell {
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
+    background: transparent;
   }
 
   .click-disabled {
     pointer-events: none;
+  }
+  .note {
+    background: linear-gradient(45deg, rgb(253, 126, 20) 0%, rgb(250, 82, 82) 100%);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
   }
   
   
