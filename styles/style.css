@@ -1,3 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+i {
+  pointer-events: none;
+}
 .displayFCC_col {
   display: flex;
   justify-content: center;
@@ -65,21 +74,6 @@
     }
   }
 
-
-
-  
-  * {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-  }
-  
-  i {
-    pointer-events: none;
-  }
-  
-  
   .done {
     opacity: 0.5;
     text-decoration: line-through;
@@ -122,6 +116,18 @@
     }
   }
 
+  .month-title {
+    width: 100%;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  #this-month {
+    font-size: 20px;
+    font-weight: 700;
+  }
   .week-row {
     display: flex;
   }

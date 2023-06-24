@@ -17,7 +17,10 @@ function initCalendar() {
 
   // 恢復已有的備註
   restoreNotes();
+  addPrevNext();
+}
 
+function addPrevNext() {
   // 監聽切換月份按鈕
   const prevBtn = document.getElementById("prev-month");
   prevBtn.addEventListener("click", () => changeMonth(-1));
@@ -25,15 +28,28 @@ function initCalendar() {
   const nextBtn = document.getElementById("next-month");
   nextBtn.addEventListener("click", () => changeMonth(1));
 }
-
 // 渲染行事曆
 function renderCalendar(container) {
   container.innerHTML = "";
 
   // 渲染月份標題
-  const monthTitle = document.createElement("h2");
-  monthTitle.textContent = getMonthName(calendar.month) + " " + calendar.year;
+  const monthTitle = document.createElement("div");
+  monthTitle.classList.add("month-title");
+  const prevMonth = document.createElement("span");
+  prevMonth.setAttribute("id", "prev-month");
+  prevMonth.textContent = "< 上個月";
+  const thisMonth = document.createElement("span");
+  thisMonth.setAttribute("id", "this-month");
+  thisMonth.textContent = getMonthName(calendar.month) + " " + calendar.year;
+  const nextMonth = document.createElement("span");
+  nextMonth.setAttribute("id", "next-month");
+  nextMonth.textContent = "下個月 >";
+  monthTitle.appendChild(prevMonth);
+  monthTitle.appendChild(thisMonth);
+  monthTitle.appendChild(nextMonth);
   container.appendChild(monthTitle);
+
+  addPrevNext();
 
   // 渲染行事曆內容
   const calendarContent = document.createElement("div");
@@ -110,10 +126,26 @@ function renderCalendar(container) {
 function handleDayClick(event) {
   const dayCell = event.target;
   const date = dayCell.dataset.date;
+  var note;
+  var isValid = false;
 
-  // 彈出對話框輸入備註
-  const note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
-  if (note) {
+  while (!isValid) {
+    note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
+
+    // 驗證輸入是否為數字且在指定範圍內
+    if (isNaN(note) || note < 0 || note > 999) {
+      alert("輸入無效，請重新輸入數字（0 到 999）:");
+    } else {
+      isValid = true;
+    }
+  }
+  // const note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
+  // if (isNaN(note) || note < 0 || note > 1000) {
+  //   alert("輸入無效，請重新輸入數字（0 到 1000）:");
+  // } else {
+  //   isValid = true;
+  // }
+  if (note != null) {
     addNoteToCalendar(date, note);
   }
 }
@@ -126,19 +158,26 @@ function addNoteToCalendar(date, note) {
   } else {
     calendar.notes[dateKey].pop();
   }
-  calendar.notes[dateKey].push(note);
+  if (note == "" || note === "0") {
+    delete calendar.notes[dateKey];
+  } else {
+    calendar.notes[dateKey].push(note);
+  }
   saveNotesToLocalStorage();
 
   // 更新行事曆顯示
   const dayCell = document.querySelector(`[data-date="${date}"]`);
   const noteText = document.createElement("div");
-  noteText.textContent = `${calendar.notes[dateKey]}`;
   if (dayCell.childNodes.length > 1) {
     console.log(dayCell.childNodes[1]);
     dayCell.lastChild.remove();
   }
-  noteText.classList.add("click-disabled", "note");
-  dayCell.appendChild(noteText);
+  if (note == "" || note === "0") {
+  } else {
+    noteText.textContent = `${calendar.notes[dateKey]}`;
+    noteText.classList.add("click-disabled", "note");
+    dayCell.appendChild(noteText);
+  }
 }
 
 // 保存備註到 Local Storage
