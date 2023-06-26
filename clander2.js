@@ -114,6 +114,11 @@ function renderCalendar(container) {
         dayCell.textContent = new_month[i * 7 + j];
         dayCell.dataset.date = new_month[i * 7 + j];
         dayCell.addEventListener("click", handleDayClick);
+
+        var noteText = document.createElement("div");
+        noteText.classList.add("click-disabled", "note", "opacity0");
+        noteText.textContent = "0";
+        dayCell.appendChild(noteText);
         weekRow.appendChild(dayCell);
       }
     }
@@ -200,6 +205,12 @@ function restoreNotes() {
       const dateKey = getDateKey(date);
       if (calendar.notes[dateKey]) {
         const noteContent = calendar.notes[dateKey];
+        // 原先如果有其他note，移除
+        if (dayCell.childNodes.length > 1) {
+          console.log(dayCell.childNodes[1]);
+          dayCell.lastChild.remove();
+        }
+
         const noteText = document.createElement("div");
         noteText.classList.add("click-disabled", "note");
         // Note
@@ -296,3 +307,18 @@ function changImg() {
 }
 
 changImg();
+
+// function animate() {
+//   let rotation = 0;
+//   var turnLeft = document.getElementById("my-div-left");
+//   turnLeft.addEventListener("click", function () {
+//     rotation -= 90;
+//     gsap.to("#my-div", { rotation: rotation, duration: 1 });
+//   });
+//   var turnRight = document.getElementById("my-div-right");
+//   turnRight.addEventListener("click", function () {
+//     rotation += 90;
+//     gsap.to("#my-div", { rotation: rotation, duration: 1 });
+//   });
+// }
+// animate();
