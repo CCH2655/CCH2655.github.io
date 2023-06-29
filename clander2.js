@@ -134,25 +134,60 @@ function handleDayClick(event) {
   var note;
   var isValid = false;
 
-  while (!isValid) {
-    note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
-
-    // 驗證輸入是否為數字且在指定範圍內
-    if (isNaN(note) || note < 0 || note > 999) {
-      alert("輸入無效，請重新輸入數字（0 到 999）:");
+  swal({
+    closeOnClickOutside: false,
+    title: `${calendar.month + 1}/${date}  跳了幾下呢?`,
+    content: "input",
+    buttons: {
+      cancel: "取消",
+      confirm: {
+        text: "確認",
+        // confirm的value 為input
+      },
+      danger: {
+        text: "刪除",
+        value: "delete",
+      },
+    },
+  }).then((value) => {
+    if (value == "delete") {
+      swal({
+        title: "刪除成功!",
+        icon: "info",
+      });
+      // 刪除該日記錄
+      addNoteToCalendar(date, 0);
     } else {
-      isValid = true;
+      if (value !== null && value !== "") {
+        if (value > 0 && value < 999) {
+          swal({
+            title: `成功! 跳了 ${value} 下`,
+            icon: "success",
+          });
+          addNoteToCalendar(date, value);
+        } else {
+          swal({
+            title: `請輸入正確的數字(1~999)`,
+            icon: "info",
+          });
+        }
+      }
     }
-  }
-  // const note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
-  // if (isNaN(note) || note < 0 || note > 1000) {
-  //   alert("輸入無效，請重新輸入數字（0 到 1000）:");
-  // } else {
-  //   isValid = true;
+  });
+
+  // while (!isValid) {
+  //   note = prompt(`${calendar.month + 1}/${date} 跳了幾下呢?`);
+  //   // 驗證輸入是否為數字且在指定範圍內
+  //   if (isNaN(note) || note < 0 || note > 999) {
+  //     alert("輸入無效，請重新輸入數字（0 到 999）:");
+  //   } else {
+  //     isValid = true;
+  //   }
   // }
-  if (note != null) {
-    addNoteToCalendar(date, note);
-  }
+
+  // if (note != null) {
+  //   addNoteToCalendar(date, note);
+  // }
 }
 
 // 添加備註到行事曆
@@ -163,13 +198,14 @@ function addNoteToCalendar(date, note) {
   } else {
     calendar.notes[dateKey].pop();
   }
-  if (note == "" || note === "0") {
+  // 如果輸入""或者0 都刪除
+  if (note == "" || note == "0") {
     delete calendar.notes[dateKey];
   } else {
     calendar.notes[dateKey].push(note);
   }
   saveNotesToLocalStorage();
-
+  console.log(note);
   // 更新行事曆顯示
   const dayCell = document.querySelector(`[data-date="${date}"]`);
   const noteText = document.createElement("div");
@@ -177,7 +213,10 @@ function addNoteToCalendar(date, note) {
     console.log(dayCell.childNodes[1]);
     dayCell.lastChild.remove();
   }
-  if (note == "" || note === "0") {
+  if (note == "" || note == "0") {
+    noteText.textContent = 0;
+    noteText.classList.add("click-disabled", "note", "opacity0");
+    dayCell.appendChild(noteText);
   } else {
     noteText.textContent = `${calendar.notes[dateKey]}`;
     noteText.classList.add("click-disabled", "note");

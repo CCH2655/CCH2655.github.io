@@ -1,9 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+body, p, span, h1, h2, h3, h4, h5, h6{
+  font-family: 'Noto Sans TC',sans-serif !important;
+}
+body, p, div, span, h1, h2, h3, h4, h5, h6{
+  color: rgba(89, 89, 116, 1);
+
+}
+
 i {
   pointer-events: none;
 }
@@ -26,9 +35,9 @@ i {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: #ee9ca7;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #ffdde1, #ee9ca7);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #ffdde1, #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ee9ca7;
+    background: -webkit-linear-gradient(to bottom, #ffdde1, #ee9ca7);
+    background: linear-gradient(to bottom, #ffdde1, #ee9ca7); 
 
 }
 .centered {
@@ -137,7 +146,8 @@ i {
   .day-cell {
     flex: 1;
     text-align: center;
-    padding: 10px;
+    /* 不增加左右寬度 */
+    padding: 10px 0px;
     /* border: 1px solid #ccc; */
     border-top:    0px solid  #fff;
     border-right:  0px dashed #fff;
@@ -158,6 +168,8 @@ i {
     color: white;
     border-radius: 5px;
     padding: 5px;
+    /* 增加格子內的空間 */
+    margin: 0 5px;
   }
   .opacity0 {
     opacity: 0;
