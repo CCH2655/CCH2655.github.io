@@ -8,10 +8,9 @@
 body, p, span, h1, h2, h3, h4, h5, h6{
   font-family: 'Noto Sans TC',sans-serif !important;
 }
-body, p, div, span, h1, h2, h3, h4, h5, h6{
+/* body, p, div, span, h1, h2, h3, h4, h5, h6{
   color: rgba(89, 89, 116, 1);
-
-}
+} */
 
 i {
   pointer-events: none;
@@ -55,7 +54,7 @@ i {
     width: 700px; 
     max-width: 375px;
     /* height: 300px;  */
-    padding: 16px 16px;
+    padding: 8px 16px;
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -65,11 +64,11 @@ i {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .imgContainer {
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
 }
 .imgObj{
-  margin: 0px 0px 20px;
+  margin: 0px 0px 15px;
   /* width: 100%; */
   height: 100%;
 }
@@ -129,7 +128,7 @@ i {
 
   .month-title {
     width: 100%;
-    margin: 10px 0px;
+    margin: 5px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -139,6 +138,14 @@ i {
     font-size: 20px;
     font-weight: 700;
   }
+  #prev-month {
+    border-right: 1px solid black;
+    padding-right: 5px;
+  }
+  #next-month {
+    border-left: 1px solid black;
+    padding-left: 5px;
+  }
   .week-row {
     display: flex;
   }
@@ -147,12 +154,13 @@ i {
     flex: 1;
     text-align: center;
     /* 不增加左右寬度 */
-    padding: 10px 0px;
+    padding: 5px 0px;
     /* border: 1px solid #ccc; */
     border-top:    0px solid  #fff;
     border-right:  0px dashed #fff;
     border-bottom: 2px solid rgba(255, 255, 255, 0.415);
     border-left:   0px solid  #fff;
+    font-size: 14px;
   }
   
   .empty-cell {
@@ -167,7 +175,7 @@ i {
     background: linear-gradient(45deg, rgb(253, 126, 20) 0%, rgb(250, 82, 82) 100%);
     color: white;
     border-radius: 5px;
-    padding: 5px;
+    padding: 2px 5px;
     /* 增加格子內的空間 */
     margin: 0 5px;
   }
@@ -189,4 +197,21 @@ i {
     width: 100px;
     height: 100px;
     background: orange;
+  }
+
+  /* for sweetalert */
+  /* https://sweetalert.js.org/docs/#theming */
+  
+  .swal-overlay {
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+  .swal-overlay--show-modal .swal-modal{
+    opacity: 0.85;
+  }
+  .swal-modal {
+    /* opacity: 0.85; */
+    border: 1px solid white;
+  }
+  .swal-title {
+    font-size: 20px;
   }

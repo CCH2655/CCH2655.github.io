@@ -17,7 +17,8 @@ function initCalendar() {
 
   // 恢復已有的備註
   restoreNotes();
-  addPrevNext();
+  //
+  // addPrevNext();
 }
 
 function addPrevNext() {
@@ -40,7 +41,7 @@ function renderCalendar(container) {
   prevMonth.textContent = "< 上個月";
   const thisMonth = document.createElement("span");
   thisMonth.setAttribute("id", "this-month");
-  thisMonth.textContent = getMonthName(calendar.month) + " " + calendar.year;
+  thisMonth.textContent = calendar.year + " " + getMonthName(calendar.month);
   const nextMonth = document.createElement("span");
   nextMonth.setAttribute("id", "next-month");
   nextMonth.textContent = "下個月 >";
