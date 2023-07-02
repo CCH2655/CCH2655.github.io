@@ -135,19 +135,20 @@ function handleDayClick(event) {
   var note;
   var isValid = false;
 
+  // 順序: 刪除 取消 確認
   swal({
-    closeOnClickOutside: false,
+    // closeOnClickOutside: false,
     title: `${calendar.month + 1}/${date}  跳了幾下呢?`,
     content: "input",
     buttons: {
+      danger: {
+        text: "刪除",
+        value: "delete",
+      },
       cancel: "取消",
       confirm: {
         text: "確認",
         // confirm的value 為input
-      },
-      danger: {
-        text: "刪除",
-        value: "delete",
       },
     },
   }).then((value) => {
