@@ -13,7 +13,7 @@ function initCalendar() {
   const calendarContainer = document.getElementById("calendar");
 
   // 渲染行事曆
-  renderCalendar(calendarContainer);
+  renderCalendar(calendarContainer, "lr");
 
   // 恢復已有的備註
   restoreNotes();
@@ -30,7 +30,9 @@ function addPrevNext() {
   nextBtn.addEventListener("click", () => changeMonth(1));
 }
 // 渲染行事曆
-function renderCalendar(container) {
+function renderCalendar(container, direction = "lr") {
+  // direction
+  //  "lr": slide from left to right; "rl": slide from right to left;
   container.innerHTML = "";
 
   // 渲染月份標題
@@ -84,7 +86,6 @@ function renderCalendar(container) {
   while (daycounter <= daysInMonth) {
     if (daycounter == 1) {
       for (let i = 0; i < startDay; i++) {
-        console.log(i);
         new_month.push(0);
       }
     }
@@ -126,6 +127,12 @@ function renderCalendar(container) {
     calendarContent.appendChild(weekRow);
   }
   container.appendChild(calendarContent);
+  gsap.from(calendarContent, {
+    duration: 0.5, // 過渡效果的持續時間
+    opacity: 0, // 過渡效果的起始狀態
+    x: direction == "lr" ? -100 : 100, // 過渡效果的位移
+    ease: "power2.out", // 過渡效果的緩動函數
+  });
 }
 
 // 處理日期點擊事件
@@ -207,12 +214,11 @@ function addNoteToCalendar(date, note) {
     calendar.notes[dateKey].push(note);
   }
   saveNotesToLocalStorage();
-  console.log(note);
   // 更新行事曆顯示
   const dayCell = document.querySelector(`[data-date="${date}"]`);
   const noteText = document.createElement("div");
   if (dayCell.childNodes.length > 1) {
-    console.log(dayCell.childNodes[1]);
+    // console.log(dayCell.childNodes[1]);
     dayCell.lastChild.remove();
   }
   if (note == "" || note == "0") {
@@ -248,7 +254,7 @@ function restoreNotes() {
         const noteContent = calendar.notes[dateKey];
         // 原先如果有其他note，移除
         if (dayCell.childNodes.length > 1) {
-          console.log(dayCell.childNodes[1]);
+          // console.log(dayCell.childNodes[1]);
           dayCell.lastChild.remove();
         }
 
@@ -274,7 +280,21 @@ function changeMonth(monthOffset) {
     calendar.year--;
   }
 
-  renderCalendar(document.getElementById("calendar"));
+  var direction = null;
+  switch (monthOffset) {
+    case -1:
+      direction = "lr";
+      break;
+    case 1:
+      direction = "rl";
+      break;
+    default:
+      direction = "lr";
+      break;
+  }
+  console.log(monthOffset);
+  console.log(direction);
+  renderCalendar(document.getElementById("calendar"), direction);
 
   // 切換候補上note
   restoreNotes();
@@ -315,7 +335,6 @@ initCalendar();
 function changImg() {
   // 獲取圖片元素
   var imageEl = document.getElementById("switchImg");
-  console.log(imageEl);
   // 定義圖片資料夾路徑
   var imagePath = "img/";
 
